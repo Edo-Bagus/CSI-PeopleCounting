@@ -26,6 +26,8 @@ from .feature_extraction import (
 )
 from .models import (
     make_xgboost_pipeline,
+    make_xgboost_regression_pipeline,
+    make_knn_pipeline,
 )
 
 __all__ = [
@@ -44,4 +46,6 @@ __all__ = [
     "extract_features_from_window",
     # Model functions
     "make_xgboost_pipeline",
+    "make_xgboost_regression_pipeline",
+    "make_knn_pipeline",
 ]

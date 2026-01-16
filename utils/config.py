@@ -33,7 +33,7 @@ TEST_SIZE = 0.15
 VAL_SIZE = 0.15  # proporsi terhadap total data (bukan terhadap train saja)
 
 # ================================
-# XGBoost Parameters
+# XGBoost Parameters (Classification)
 # ================================
 XGBOOST_PARAMS = {
     "objective": "multi:softprob",
@@ -45,5 +45,21 @@ XGBOOST_PARAMS = {
     "tree_method": "hist",
     "n_jobs": -1,
     "eval_metric": "mlogloss",
-    "random_state": RANDOM_STATE
+    "random_state": RANDOM_STATE,
+}
+
+# ================================
+# XGBoost Parameters (Ordinal Regression)
+# ================================
+XGBOOST_REG_PARAMS = {
+    "objective": "reg:squarederror",
+    "n_estimators": 300,
+    "max_depth": 5,
+    "learning_rate": 0.1,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "tree_method": "hist",
+    "n_jobs": -1,
+    "eval_metric": "rmse",
+    "random_state": RANDOM_STATE,
 }
