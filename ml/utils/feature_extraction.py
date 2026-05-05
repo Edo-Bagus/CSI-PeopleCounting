@@ -45,16 +45,23 @@ def window_indices(
     return indices
 
 
-def extract_features_from_window(mag_win: np.ndarray) -> np.ndarray:
+def extract_features_from_window(
+    mag_win: np.ndarray,
+    phase_win: np.ndarray = None,
+) -> np.ndarray:
     """
-    Ekstrak fitur statistik dari satu window (magnitude saja).
+    Ekstrak fitur statistik dari satu window (magnitude, dan opsional phase).
 
-    Fitur: statistik per subcarrier (mean, std, min, max, median) untuk magnitude.
+    Fitur: statistik per subcarrier (mean, std, min, max, median).
+    Jika `phase_win` diberikan, fitur phase di-concatenate setelah fitur magnitude.
     
     Parameters
     ----------
     mag_win : np.ndarray
         Magnitude window berukuran (n_subcarrier, window_size)
+    phase_win : np.ndarray, optional
+        Phase window berukuran (n_subcarrier, window_size).
+        Jika None, hanya fitur magnitude yang diekstrak.
         
     Returns
     -------
@@ -76,6 +83,10 @@ def extract_features_from_window(mag_win: np.ndarray) -> np.ndarray:
         return np.stack(feats, axis=1)  # (n_subcarrier, n_stats)
 
     mag_feats = compute_stats(mag_win)
+
+    if phase_win is not None:
+        phase_feats = compute_stats(phase_win)
+        return np.concatenate([mag_feats.ravel(), phase_feats.ravel()])
 
     # Flatten jadi 1D
     return mag_feats.ravel()

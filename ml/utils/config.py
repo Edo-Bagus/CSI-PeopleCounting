@@ -2,6 +2,7 @@
 Configuration and constants for CSI-based people counting pipeline.
 """
 
+import math
 import os
 
 # ================================
@@ -15,6 +16,12 @@ PC_FOLDERS = ["PC-1a", "PC-2a", "PC-3a", "PC-4a"]
 # ================================
 BASE_SAVGOL_WINDOW = 11  # akan disesuaikan jika sinyal terlalu pendek
 SAVGOL_POLYORDER = 3
+
+# Default parameter untuk phase sanitization (opsional)
+HAMPEL_WINDOW_SIZE = 7
+HAMPEL_N_SIGMAS = 3.0
+PHASE_UNWRAP_THRESHOLD_RAD = 0.9 * math.pi
+ENABLE_PHASE_DETRENDING = False
 
 # Index subcarrier yang akan dihapus (control signal)
 DELETE_SUBCARRIER_INDICES = [0, 1, 2, 3, 4, 5, 127, 128, 129, 251, 252, 253, 254, 255]

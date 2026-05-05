@@ -28,6 +28,7 @@ from .models import (
     make_xgboost_pipeline,
     make_xgboost_regression_pipeline,
     make_knn_pipeline,
+    make_random_forest_pipeline,
 )
 
 __all__ = [
@@ -48,4 +49,5 @@ __all__ = [
     "make_xgboost_pipeline",
     "make_xgboost_regression_pipeline",
     "make_knn_pipeline",
+    "make_random_forest_pipeline",
 ]
