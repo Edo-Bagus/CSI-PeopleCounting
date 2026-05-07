@@ -202,12 +202,13 @@ def process_one_file(
     records, magic_count, bad_records = parse_records(
         data, max_csi_len=max_csi_len, strict=strict
     )
-    write_npz(records, output_path)
+    trimmed = records[2000:-2000] if len(records) > 4000 else []
+    write_npz(trimmed, output_path)
 
     if not quiet:
         print(
             f"[ok] {input_path.name} -> {output_path} | "
-            f"rows={len(records)}, magic={magic_count}, bad={bad_records}"
+            f"rows={len(trimmed)} (trimmed from {len(records)}), magic={magic_count}, bad={bad_records}"
         )
     return True
 

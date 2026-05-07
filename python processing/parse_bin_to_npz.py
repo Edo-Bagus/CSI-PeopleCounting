@@ -184,10 +184,10 @@ def process_one_file(
 
     data = input_path.read_bytes()
     records = list(parse_records(data, strict=strict))
-    write_npz(records, output_path)
-    print(f"[ok] {input_path.name} -> {output_path}")
+    trimmed = records[2000:-2000] if len(records) > 4000 else []
+    write_npz(trimmed, output_path)
+    print(f"[ok] {input_path.name} -> {output_path} | rows={len(trimmed)} (trimmed from {len(records)})")
     return True
-
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Parse CSI .bin into .npz files")
